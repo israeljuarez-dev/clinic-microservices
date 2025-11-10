@@ -6,8 +6,27 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="clinic-microservices" />
+        <module name="microservice-gateway" />
+        <module name="microservice-doctor-service" />
+        <module name="microservice-payment" />
+        <module name="microservice-doctor-package" />
+        <module name="microservice-doctor" />
+        <module name="microservice-invoice" />
+        <module name="microservice-medical-appointment" />
+        <module name="microservice-patient" />
       </profile>
     </annotationProcessing>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="microservice-doctor" options="-parameters" />
+      <module name="microservice-doctor-package" options="-parameters" />
+      <module name="microservice-doctor-service" options="-parameters" />
+      <module name="microservice-gateway" options="-parameters" />
+      <module name="microservice-invoice" options="-parameters" />
+      <module name="microservice-medical-appointment" options="-parameters" />
+      <module name="microservice-patient" options="-parameters" />
+      <module name="microservice-payment" options="-parameters" />
+    </option>
   </component>
 </project>
