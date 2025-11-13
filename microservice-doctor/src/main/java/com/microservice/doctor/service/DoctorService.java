@@ -9,6 +9,7 @@ import com.microservice.doctor.model.Doctor;
 import com.microservice.doctor.repository.DoctorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @Service
@@ -28,16 +29,22 @@ public class DoctorService {
     }
 
     //Eliminar un doctor:
-    public Mono<Void> deleteDoctor(String idDoctor) {
-        return doctorRepository.findById(idDoctor)
-                .switchIfEmpty(Mono.error(new DoctorNotFoundException(idDoctor)))
-                .flatMap(existingDoctor -> doctorRepository.deleteById(idDoctor));
+    public Mono<Void> deleteDoctor(String id_doctor) {
+        return doctorRepository.findById(id_doctor)
+                .switchIfEmpty(Mono.error(new DoctorNotFoundException(id_doctor)))
+                .flatMap(existingDoctor -> doctorRepository.deleteById(id_doctor));
     }
 
     //Buscar por id:
     public Mono<DoctorDTO> findById(String id_doctor){
         return doctorRepository.findById(id_doctor)
                 .switchIfEmpty(Mono.error(new DoctorNotFoundException(id_doctor)))
+                .map(mapperDoctor::toDto);
+    }
+
+    //Buscar todos los medicos:
+    public Flux<DoctorDTO> findAll(){
+        return doctorRepository.findAll()
                 .map(mapperDoctor::toDto);
     }
 

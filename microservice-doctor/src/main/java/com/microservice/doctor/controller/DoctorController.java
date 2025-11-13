@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -31,6 +32,12 @@ public class DoctorController {
     @GetMapping("/id/{id_doctor}")
     public Mono<ResponseEntity<DoctorDTO>> getById(@PathVariable String id_doctor){
         return doctorService.findById(id_doctor)
+                .map(ResponseEntity::ok);
+    }
+
+    @GetMapping("/all")
+    public Flux<ResponseEntity<DoctorDTO>> getAll(){
+        return doctorService.findAll()
                 .map(ResponseEntity::ok);
     }
 
