@@ -34,6 +34,13 @@ public class DoctorService {
                 .flatMap(existingDoctor -> doctorRepository.deleteById(idDoctor));
     }
 
+    //Buscar por id:
+    public Mono<DoctorDTO> findById(String id_doctor){
+        return doctorRepository.findById(id_doctor)
+                .switchIfEmpty(Mono.error(new DoctorNotFoundException(id_doctor)))
+                .map(mapperDoctor::toDto);
+    }
+
 
 
 

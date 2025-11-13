@@ -28,6 +28,12 @@ public class DoctorController {
                 .then(Mono.just(ResponseEntity.noContent().build())); // HTTP 204
     }
 
+    @GetMapping("/id/{id_doctor}")
+    public Mono<ResponseEntity<DoctorDTO>> getById(@PathVariable String id_doctor){
+        return doctorService.findById(id_doctor)
+                .map(ResponseEntity::ok);
+    }
+
 
 
 }
