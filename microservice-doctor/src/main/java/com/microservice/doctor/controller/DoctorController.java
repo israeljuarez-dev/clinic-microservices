@@ -2,6 +2,8 @@ package com.microservice.doctor.controller;
 
 import com.microservice.doctor.dtos.DoctorDTO;
 import com.microservice.doctor.dtos.DoctorRequest;
+import com.microservice.doctor.dtos.DoctorUpdateRequest;
+import com.microservice.doctor.exeption.DoctorNotFoundException;
 import com.microservice.doctor.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +43,18 @@ public class DoctorController {
                 .map(ResponseEntity::ok);
     }
 
+
+    @PutMapping("/update/{id_doctor}")
+    public Mono<ResponseEntity<DoctorDTO>> updateDoctor(
+            @PathVariable String id_doctor,
+            @RequestBody Mono<DoctorUpdateRequest> requestMono
+    ) {
+        return doctorService.changeDoctor(id_doctor, requestMono)
+                .map(updatedDoctorDTO -> ResponseEntity.ok(updatedDoctorDTO)) // HTTP 200
+                .onErrorResume(DoctorNotFoundException.class, ex ->
+                        Mono.just(ResponseEntity.notFound().build()) // HTTP 404 si no se encuentra
+                );
+    }
 
 
 }
