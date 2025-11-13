@@ -6,10 +6,7 @@ import com.microservice.doctor.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
 @RestController
@@ -21,8 +18,16 @@ public class DoctorController {
     @PostMapping("/add")
     public Mono<ResponseEntity<DoctorDTO>> createDoctor(@RequestBody Mono<DoctorRequest> doctorRequestMono) {
         return doctorRequestMono
-                .flatMap(doctorService::createDoctor) // todo lo hace el service
+                .flatMap(doctorService::createDoctor)
                 .map(dto -> ResponseEntity.status(HttpStatus.CREATED).body(dto));
     }
+
+    @DeleteMapping("/delete/id_doctor")
+    public Mono<ResponseEntity<Void>> deleteDoctor(@PathVariable String id_doctor) {
+        return doctorService.deleteDoctor(id_doctor)
+                .then(Mono.just(ResponseEntity.noContent().build())); // HTTP 204
+    }
+
+
 
 }
