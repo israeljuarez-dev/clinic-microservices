@@ -7,7 +7,6 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="microservice-gateway" />
-        <module name="microservice-doctor-service" />
         <module name="microservice-payment" />
         <module name="microservice-doctor-package" />
         <module name="microservice-invoice" />
@@ -21,6 +20,7 @@
         <processorPath useClasspath="false">
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
         </processorPath>
+        <module name="microservice-doctor-service" />
         <module name="microservice-doctor" />
       </profile>
     </annotationProcessing>
@@ -29,7 +29,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="microservice-doctor" options="-parameters" />
       <module name="microservice-doctor-package" options="-parameters" />
-      <module name="microservice-doctor-service" options="-parameters" />
+      <module name="microservice-doctor-service" options="" />
       <module name="microservice-gateway" options="-parameters" />
       <module name="microservice-invoice" options="-parameters" />
       <module name="microservice-medical-appointment" options="-parameters" />

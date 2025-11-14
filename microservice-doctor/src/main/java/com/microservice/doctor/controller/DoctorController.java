@@ -50,7 +50,7 @@ public class DoctorController {
             @RequestBody Mono<DoctorUpdateRequest> requestMono
     ) {
         return doctorService.changeDoctor(id_doctor, requestMono)
-                .map(updatedDoctorDTO -> ResponseEntity.ok(updatedDoctorDTO)) // HTTP 200
+                .map(ResponseEntity::ok) // HTTP 200
                 .onErrorResume(DoctorNotFoundException.class, ex ->
                         Mono.just(ResponseEntity.notFound().build()) // HTTP 404 si no se encuentra
                 );
