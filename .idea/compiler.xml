@@ -14,16 +14,6 @@
         <module name="microservice-invoice" />
         <module name="microservice-medical-appointment" />
       </profile>
-      <profile name="Annotation profile for microservice-doctor" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
-        </processorPath>
-        <module name="microservice-doctor" />
-      </profile>
       <profile name="Annotation profile for clinic-microservices" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
@@ -33,6 +23,7 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
         <module name="microservice-doctor-service" />
+        <module name="microservice-doctor" />
       </profile>
     </annotationProcessing>
   </component>
@@ -40,7 +31,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="microservice-doctor" options="-parameters" />
       <module name="microservice-doctor-package" options="-parameters" />
-      <module name="microservice-doctor-service" options="" />
+      <module name="microservice-doctor-service" options="-parameters" />
       <module name="microservice-gateway" options="-parameters" />
       <module name="microservice-invoice" options="-parameters" />
       <module name="microservice-medical-appointment" options="-parameters" />
