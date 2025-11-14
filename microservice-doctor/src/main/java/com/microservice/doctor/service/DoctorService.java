@@ -50,12 +50,12 @@ public class DoctorService {
     }
 
     //Acualizar medico:
-    public Mono<DoctorDTO> changeDoctor(String idDoctor, Mono<DoctorUpdateRequest> requestMono) {
-        return doctorRepository.findById(idDoctor)
-                // 1️⃣ Si no existe el doctor, lanza excepción
-                .switchIfEmpty(Mono.error(new DoctorNotFoundException(idDoctor)))
+    public Mono<DoctorDTO> changeDoctor(String id_doctor, Mono<DoctorUpdateRequest> requestMono) {
+        return doctorRepository.findById(id_doctor)
+                // Si no existe el doctor, lanza excepción
+                .switchIfEmpty(Mono.error(new DoctorNotFoundException(id_doctor)))
 
-                // 2️⃣ Si existe, mapea el DTO de actualización a entidad y setea el ID existente
+                //  Si existe, mapea el DTO de actualización a entidad y setea el ID existente
                 .flatMap(existingDoctor ->
                         requestMono.map(updateRequest -> {
                             Doctor updatedDoctor = mapperDoctor.toEntityUpdate(updateRequest);
@@ -64,10 +64,10 @@ public class DoctorService {
                         })
                 )
 
-                // 3️⃣ Guarda el doctor actualizado en la base de datos
+                // Guarda el doctor actualizado en la base de datos
                 .flatMap(doctorRepository::save)
 
-                // 4️⃣ Devuelve el DTO final
+                // Devuelve el DTO final
                 .map(mapperDoctor::toDto);
     }
 
