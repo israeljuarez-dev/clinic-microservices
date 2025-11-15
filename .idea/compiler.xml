@@ -2,18 +2,28 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
       <profile name="Maven default annotation processors profile" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="microservice-gateway" />
-        <module name="microservice-doctor-service" />
         <module name="microservice-payment" />
+        <module name="microservice-patient" />
         <module name="microservice-doctor-package" />
-        <module name="microservice-doctor" />
         <module name="microservice-invoice" />
         <module name="microservice-medical-appointment" />
-        <module name="microservice-patient" />
+      </profile>
+      <profile name="Annotation profile for clinic-microservices" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.5.Final/mapstruct-processor-1.5.5.Final.jar" />
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
+        </processorPath>
+        <module name="microservice-doctor-service" />
+        <module name="microservice-doctor" />
       </profile>
     </annotationProcessing>
   </component>
